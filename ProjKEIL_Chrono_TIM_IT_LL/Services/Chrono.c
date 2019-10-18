@@ -30,7 +30,7 @@ char digit_of(char c){
 }
 void Chrono_Task_10ms(void);
 void Chrono_Conf_io(){
-	LL_GPIO_InitTypeDef my_LL_GPIO_Init_Struct ;
+	//LL_GPIO_InitTypeDef my_LL_GPIO_Init_Struct ;
 	
 	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 	

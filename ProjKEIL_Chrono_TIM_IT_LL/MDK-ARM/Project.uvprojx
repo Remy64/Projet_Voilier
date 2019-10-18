@@ -406,6 +406,21 @@
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>ADC_Driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\MyDrivers\ADC_Driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\MyDrivers\PWM_Driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Driver.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -465,6 +480,46 @@
               <FileName>startup_stm32f103xb.s</FileName>
               <FileType>2</FileType>
               <FilePath>startup_stm32f103xb.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Components</GroupName>
+          <Files>
+            <File>
+              <FileName>Accel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Accel.h</FilePath>
+            </File>
+            <File>
+              <FileName>Battery.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Battery.h</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ecoute.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Ecoute.h</FilePath>
+            </File>
+            <File>
+              <FileName>Gir.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Gir.h</FilePath>
+            </File>
+            <File>
+              <FileName>Plate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Plate.h</FilePath>
+            </File>
+            <File>
+              <FileName>RX_Rcv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\RX_Rcv.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -873,6 +928,21 @@
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>ADC_Driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\MyDrivers\ADC_Driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Driver.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\MyDrivers\PWM_Driver.h</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Driver.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -932,6 +1002,46 @@
               <FileName>startup_stm32f103xb.s</FileName>
               <FileType>2</FileType>
               <FilePath>startup_stm32f103xb.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Components</GroupName>
+          <Files>
+            <File>
+              <FileName>Accel.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Accel.h</FilePath>
+            </File>
+            <File>
+              <FileName>Battery.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Battery.h</FilePath>
+            </File>
+            <File>
+              <FileName>Display.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Display.h</FilePath>
+            </File>
+            <File>
+              <FileName>Ecoute.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Ecoute.h</FilePath>
+            </File>
+            <File>
+              <FileName>Gir.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Gir.h</FilePath>
+            </File>
+            <File>
+              <FileName>Plate.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\Plate.h</FilePath>
+            </File>
+            <File>
+              <FileName>RX_Rcv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Components\RX_Rcv.h</FilePath>
             </File>
           </Files>
         </Group>

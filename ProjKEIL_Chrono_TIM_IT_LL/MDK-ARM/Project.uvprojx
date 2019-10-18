@@ -406,6 +406,31 @@
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>ADC_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\ADC_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur_Incr_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\Codeur_Incr_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\UART_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Input_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Input_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Output_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Output_Driver.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -435,6 +460,11 @@
               <FileName>stm32f1xx_ll_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -873,6 +903,31 @@
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\MyTimer.c</FilePath>
             </File>
+            <File>
+              <FileName>ADC_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\ADC_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>Codeur_Incr_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\Codeur_Incr_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\UART_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Input_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Input_Driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>PWM_Output_Driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\PWM_Output_Driver.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -902,6 +957,11 @@
               <FileName>stm32f1xx_ll_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LLDrivers\src\stm32f1xx_ll_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f1xx_ll_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\LLDrivers\src\stm32f1xx_ll_adc.c</FilePath>
             </File>
           </Files>
         </Group>

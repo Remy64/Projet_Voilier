@@ -4,7 +4,7 @@
 #include "MyTimer.h"
 #include "stm32f1xx_ll_tim.h"
 
-void init_PWM(TIM_TypeDef * timer,int freq);
+void init_PWM(TIM_TypeDef * timer,int freq,int ch);
 void set_PWM_COMPARE(TIM_TypeDef * timer,int compare,int ch);
 
 

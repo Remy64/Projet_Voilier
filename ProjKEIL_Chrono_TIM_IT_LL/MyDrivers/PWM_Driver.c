@@ -1,12 +1,12 @@
 #include "PWM_Driver.h"
-void init_PWM(TIM_TypeDef * timer,int freq){
+void init_PWM(TIM_TypeDef * timer,int freq,int ch){
 	int arr =999;
 	int psc = 72000000/(arr+1)/freq;
-	int compare = 0; //TODO to compute using freq psc and arr range 0x0000 0xFFFF
-	int ch = 1; //Channel 1 by default ? 
+	int compare = 800;//TODO
 	MyTimer_Conf(timer,arr,psc); //Define PWM frequency
 	LL_TIM_OC_SetMode(timer,ch,LL_TIM_OCMODE_PWM1);//Set PWM
 	set_PWM_COMPARE(timer,compare,ch);//Define PWM duty cycle
+	LL_TIM_EnableCounter(timer);
 }
 
 void set_PWM_COMPARE(TIM_TypeDef * timer,int compare,int ch){//Define PWM duty cycle

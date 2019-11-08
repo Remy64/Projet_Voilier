@@ -3,8 +3,8 @@
 //Constantes à vérifier
 const double ANGLE_MAX = 180;
 const double ANGLE_MIN = 0;
-const double T_MAX = 0.02;
-const double T_MIN = 0.01;
+const double TH_MAX = 0.002;
+const double TH_MIN = 0.001;
 
 PWM_TypeDef pwm_ecoute;
 void conf_pwm_ecoute(){
@@ -16,6 +16,6 @@ void conf_pwm_ecoute(){
 	pwm_ecoute=init_PWM(TIM1,50,1);
 }
 void set_angle_ecoute(double theta){
-	double period = T_MIN + (theta/(ANGLE_MAX-ANGLE_MIN))*(T_MAX-T_MIN); //On ramène l'intervalle angulaire sur l'intervalle temporel.
+	double period = TH_MIN + (theta/(ANGLE_MAX-ANGLE_MIN))*(TH_MAX-TH_MIN); //On ramène l'intervalle angulaire sur l'intervalle temporel.
 	set_PWM_TH(&pwm_ecoute,period);
 }

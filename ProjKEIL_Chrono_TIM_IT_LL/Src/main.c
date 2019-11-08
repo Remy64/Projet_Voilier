@@ -21,6 +21,7 @@
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 
 #include "Chrono.h"
+#include "ADC_Driver.h"
 
 void  SystemClock_Config(void);
 
@@ -43,6 +44,8 @@ int main(void)
 	/* Infinite loop */
   while (1)
   {		
+		configureADC(ADC1, TIM1);
+		startADC();
 		
   }
 }

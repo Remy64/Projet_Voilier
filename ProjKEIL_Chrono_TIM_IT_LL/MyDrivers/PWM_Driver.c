@@ -4,7 +4,7 @@ PWM_TypeDef init_PWM(TIM_TypeDef * timer,int freq,int ch){
 	PWM_TypeDef pwm;
 	int arr =GLOBAL_ARR-1;
 	int psc = 72000000/(GLOBAL_ARR)/freq;
-	int compare = 400;//TODO
+	int compare = 0;//TODO
 	MyTimer_Conf(timer,arr,psc); //Define PWM frequency
 	LL_TIM_OC_SetMode(timer,ch,LL_TIM_OCMODE_PWM1);//Set PWM
 	pwm.timer=timer;
@@ -26,13 +26,15 @@ void set_PWM_COMPARE(PWM_TypeDef * pwm,int compare){//Define PWM duty cycle
 	}
 }
 
-void set_PWM_TH(PWM_TypeDef * pwm,int th){
-	double T = 1.0/pwm->freq;
-	double coeff = th/T;
+void set_PWM_TH(PWM_TypeDef * pwm,double th){
+	double coeff = th*pwm->freq;
 	int compare = GLOBAL_ARR*coeff;
 	set_PWM_COMPARE(pwm,compare);
-	
-	
-	
-	
+}
+void set_PWM_RATIO(PWM_TypeDef * pwm,double ratio){
+	int compare = GLOBAL_ARR * ratio;
+	set_PWM_COMPARE(pwm,compare);
+}
+double get_PWM_Period(PWM_TypeDef * pwm){
+		return 1/pwm->freq;
 }

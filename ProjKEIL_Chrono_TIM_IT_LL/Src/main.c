@@ -20,6 +20,7 @@
 #include "stm32f1xx_ll_utils.h"   // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
+#include "Ecoute.h"
 
 #include "Chrono.h"
 
@@ -36,10 +37,16 @@ void  SystemClock_Config(void);
 
 
 // R:\LLGDB\CubeF1\Drivers\STM32F1xx_HAL_Driver\HTML
+//To see PIN X N in Loic analyser : PORTX.N
+//MOE a 1 -> TIMx_BTRD dans le genre
 int main(void)
 {
   /* Configure the system clock to 72 MHz */
   SystemClock_Config();
+	conf_pwm_ecoute();
+	//TIM1->CNT ;
+	
+	
 	
 	/* Infinite loop */
   while (1)

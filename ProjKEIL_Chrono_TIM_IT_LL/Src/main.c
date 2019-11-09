@@ -21,7 +21,7 @@
 #include "stm32f1xx_ll_system.h" // utile dans la fonction SystemClock_Config
 #include "stm32f1xx_ll_tim.h" 
 #include "Ecoute.h"
-
+#include "Plate.h"
 #include "Chrono.h"
 
 void  SystemClock_Config(void);
@@ -43,16 +43,83 @@ int main(void)
 {
   /* Configure the system clock to 72 MHz */
   SystemClock_Config();
-	conf_pwm_ecoute();
-	//TIM1->CNT ;
 	
+//PWM TESTS
+//UNCOMMENT EACH SECTIONS INDIVIDUALLY TO PERFORM TESTS
 	
+	/* 
+	//SECTION 1 : MANUAL TEST PWM DRIVER PORT A8 TIMER 1
+	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE);
+	LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_8,LL_GPIO_OUTPUT_PUSHPULL); // ATTENTION
+	TIM1->CCER |= TIM_CCER_CC1E;
+	TIM1->BDTR |= TIM_BDTR_MOE;
+	PWM_TypeDef pwm =init_PWM(TIM1,50,1);//Period T = 0.02s
+	//Manual Test high period time setting
+	//set_PWM_TH(&pwm,0.005);//0.02/4
+	//set_PWM_TH(&pwm,0.01);
+	//set_PWM_TH(&pwm,0.015);
+	//set_PWM_TH(&pwm,0.02);
 	
-	/* Infinite loop */
+	//Manual Test high period ratio setting(Uncomment only one of the manuals and automated test cases)
+	//set_PWM_RATIO(&pwm,0.25);
+	//set_PWM_RATIO(&pwm,0.5);
+	//set_PWM_RATIO(&pwm,0.75);
+	//set_PWM_RATIO(&wm,1);
+	
+	//Automated cycling ratio test
+	//Cycle infinitely through 0%;25%;50%;75%;100%
+	int i=0;
+	int c=0;
   while (1)
   {		
-
+		if(++i>1000000){
+			c++;
+			c%=5;
+			i=0;
+			set_PWM_RATIO(&pwm,c*0.25);
+		}
   }
+	//END SECTION 1
+	*/
+	
+	/*
+	//SECTION 2: TEST PWM_CONF FOR COMPONENT : ECOUTE
+	//Increases angle from 0 to 180 by 10 degrees steps then stops PWM
+	//WATCH PA8
+	conf_pwm_ecoute();
+	int i=0;
+	double c=0.0;
+	while (c<=180.0){
+		if(++i>50000){
+			c+=10;
+			i=0;
+			set_angle_ecoute(c);
+		}
+	}
+	TIM1->CCER &= ~TIM_CCER_CC2E;
+	//END SECTION 2
+	*/
+	
+	/*
+	//SECTION 3 : TEST PWM FOR COMPONENT : PLATE
+	//Increases mean voltage from 0 to 12 by 0.5V steps then stops PWM
+	//WATCH PA1
+	conf_pwm_plate();
+	int i=0;
+	double c= 0.0;
+	set_servo_mean_voltage(c);
+	while (c<=12.0){
+		if(++i>50000){
+			c+=0.5;
+			i=0;
+			set_servo_mean_voltage(c);
+		}
+	}
+	TIM2->CCER &= ~TIM_CCER_CC2E;
+	//END SECTION 3
+	*/
+		
 }
 
 

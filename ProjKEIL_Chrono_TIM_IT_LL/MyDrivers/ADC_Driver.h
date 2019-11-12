@@ -3,6 +3,9 @@
 #include "stm32f1xx_ll_adc.h"
 
 void configureADC(ADC_TypeDef * ADCx, TIM_TypeDef * Timer);
-void startADC(void);
+void startADC();
+int getX(void);
+int getY(void);
+int getBatteryLevel(void);
 
 #endif

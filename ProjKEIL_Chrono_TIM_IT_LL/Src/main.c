@@ -34,6 +34,9 @@ void  SystemClock_Config(void);
   */
 	int view;
 
+int X = 0;
+int Y = 0;
+int batteryLevel = 0;
 
 // R:\LLGDB\CubeF1\Drivers\STM32F1xx_HAL_Driver\HTML
 int main(void)
@@ -42,11 +45,14 @@ int main(void)
   SystemClock_Config();
 	
 	/* Infinite loop */
+	
+	configureADC(ADC1, TIM1);
+	startADC();
   while (1)
   {		
-		configureADC(ADC1, TIM1);
-		startADC();
-		
+		X = getX();
+		Y = getY();
+		batteryLevel = getBatteryLevel();
   }
 }
 
@@ -79,7 +85,7 @@ void SystemClock_Config(void)
   /* Enable HSE oscillator */
 	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
 	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
+  //LL_RCC_HSE_EnableBypass();
   LL_RCC_HSE_Enable();
   while(LL_RCC_HSE_IsReady() != 1)
   {

@@ -11,3 +11,5 @@ nucleo-f103rb\main.o: ..\Inc\system_stm32f1xx.h
 nucleo-f103rb\main.o: ..\LLDrivers\inc\stm32f1xx_ll_utils.h
 nucleo-f103rb\main.o: ..\LLDrivers\inc\stm32f1xx_ll_system.h
 nucleo-f103rb\main.o: ..\Services\Chrono.h
+nucleo-f103rb\main.o: ..\MyDrivers\ADC_Driver.h
+nucleo-f103rb\main.o: ..\LLDrivers\inc\stm32f1xx_ll_adc.h

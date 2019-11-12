@@ -47,7 +47,7 @@ int main(void)
 //PWM TESTS
 //UNCOMMENT EACH SECTIONS INDIVIDUALLY TO PERFORM TESTS
 	
-	/* 
+	/*
 	//SECTION 1 : MANUAL TEST PWM DRIVER PORT A8 TIMER 1
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_8,LL_GPIO_MODE_ALTERNATE);
@@ -83,23 +83,24 @@ int main(void)
 	//END SECTION 1
 	*/
 	
-	/*
+	
 	//SECTION 2: TEST PWM_CONF FOR COMPONENT : ECOUTE
 	//Increases angle from 0 to 180 by 10 degrees steps then stops PWM
 	//WATCH PA8
 	conf_pwm_ecoute();
 	int i=0;
 	double c=0.0;
+	set_angle_ecoute(0);
 	while (c<=180.0){
-		if(++i>50000){
+		if(++i>500000){
 			c+=10;
 			i=0;
 			set_angle_ecoute(c);
 		}
 	}
-	TIM1->CCER &= ~TIM_CCER_CC2E;
+	set_angle_ecoute(0);
 	//END SECTION 2
-	*/
+	
 	
 	/*
 	//SECTION 3 : TEST PWM FOR COMPONENT : PLATE

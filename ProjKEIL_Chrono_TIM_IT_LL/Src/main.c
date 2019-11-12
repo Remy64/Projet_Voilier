@@ -107,19 +107,26 @@ int main(void)
 	//Increases mean voltage from 0 to 12 by 0.5V steps then stops PWM
 	//WATCH PA1
 	conf_pwm_plate();
+	set_orientation(1);
 	int i=0;
 	double c= 0.0;
 	set_servo_mean_voltage(c);
-	while (c<=12.0){
+	while (c<12.0){
 		if(++i>50000){
 			c+=0.5;
+			if(c>6.0){
+				set_orientation(0);
+			}
 			i=0;
-			set_servo_mean_voltage(c);
+			double modc = c;
+			if(modc>6)modc=c-6;
+			set_servo_mean_voltage(modc);
 		}
 	}
 	TIM2->CCER &= ~TIM_CCER_CC2E;
 	//END SECTION 3
 	*/
+	
 		
 }
 

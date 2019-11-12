@@ -5,4 +5,5 @@
 #include "stm32f1xx_ll_gpio.h"
 void conf_pwm_plate(void);//Timer 2;Port A1;Channel 2;50Hz
 void set_servo_mean_voltage(double mean_voltage);//Set the PWM high period to generate a mean signal of [mean_voltage]V
+void set_orientation(char orientation);
 #endif

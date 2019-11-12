@@ -7,10 +7,10 @@ PWM_TypeDef init_PWM(TIM_TypeDef * timer,int freq,int ch){
 	int compare = 0;
 	MyTimer_Conf(timer,arr,psc); //Define PWM frequency
 	switch(ch){//Set PWM mode on correct channel WARNING : LL_TIM_CHANNEL_CHx != x except for CH1
-		case 1:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH1,LL_TIM_OCMODE_PWM1);
-		case 2:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH2,LL_TIM_OCMODE_PWM1);
-		case 3:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH3,LL_TIM_OCMODE_PWM1);
-		default:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH4,LL_TIM_OCMODE_PWM1);
+		case 1:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH1,LL_TIM_OCMODE_PWM1);break;
+		case 2:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH2,LL_TIM_OCMODE_PWM1);break;
+		case 3:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH3,LL_TIM_OCMODE_PWM1);break;
+		default:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH4,LL_TIM_OCMODE_PWM1);break;
 	}
 	pwm.timer=timer;
 	pwm.freq=freq;
@@ -24,10 +24,10 @@ PWM_TypeDef init_PWM(TIM_TypeDef * timer,int freq,int ch){
 
 void set_PWM_COMPARE(PWM_TypeDef * pwm,int compare){//Define PWM duty cycle
 		switch(pwm->ch){
-			case 1:LL_TIM_OC_SetCompareCH1(pwm->timer,compare); //Modify CCRx register
-			case 2:LL_TIM_OC_SetCompareCH2(pwm->timer,compare);
-			case 3:LL_TIM_OC_SetCompareCH3(pwm->timer,compare);
-			default:LL_TIM_OC_SetCompareCH4(pwm->timer,compare);
+			case 1:LL_TIM_OC_SetCompareCH1(pwm->timer,compare);break; //Modify CCRx register
+			case 2:LL_TIM_OC_SetCompareCH2(pwm->timer,compare);break;
+			case 3:LL_TIM_OC_SetCompareCH3(pwm->timer,compare);break;
+			default:LL_TIM_OC_SetCompareCH4(pwm->timer,compare);break;
 		}
 }
 

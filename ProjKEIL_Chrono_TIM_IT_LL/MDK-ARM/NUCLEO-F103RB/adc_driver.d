@@ -11,5 +11,6 @@ nucleo-f103rb\adc_driver.o: ..\Inc\system_stm32f1xx.h
 nucleo-f103rb\adc_driver.o: ..\LLDrivers\inc\stm32f1xx_ll_adc.h
 nucleo-f103rb\adc_driver.o: ..\LLDrivers\inc\stm32f1xx_ll_tim.h
 nucleo-f103rb\adc_driver.o: ..\LLDrivers\inc\stm32f1xx_ll_gpio.h
+nucleo-f103rb\adc_driver.o: ..\LLDrivers\inc\stm32f1xx_ll_rcc.h
 nucleo-f103rb\adc_driver.o: ..\MyDrivers\ADC_Driver.h
 nucleo-f103rb\adc_driver.o: ..\MyDrivers\MyTimer.h

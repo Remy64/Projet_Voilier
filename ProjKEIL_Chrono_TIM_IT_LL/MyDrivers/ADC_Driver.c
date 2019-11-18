@@ -2,6 +2,7 @@
 #include "stm32f1xx_ll_adc.h"
 #include "stm32f1xx_ll_tim.h"
 #include "stm32f1xx_ll_gpio.h"
+#include "stm32f1xx_ll_rcc.h"
 #include "ADC_Driver.h"
 #include "MyTimer.h"
 
@@ -55,7 +56,7 @@ void configureADC(ADC_TypeDef * ADCx, TIM_TypeDef * Timer) {
 	TIM = Timer;
 	
 	//enable GPIO
-	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
+	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN;
 	LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_0, LL_GPIO_MODE_ANALOG);
 	LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_1, LL_GPIO_MODE_ANALOG);
 	LL_GPIO_SetPinMode(GPIOC, LL_GPIO_PIN_2, LL_GPIO_MODE_ANALOG);
@@ -65,6 +66,13 @@ void configureADC(ADC_TypeDef * ADCx, TIM_TypeDef * Timer) {
 		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC1);
 	else if(ADC == ADC2)
 		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC2);
+	
+	//on active l'ADC
+	//LL_ADC_Enable(ADC);
+	
+	
+	//on divise la fréquence de l'ADC par 4 pour s'assurer que la fréquence de l'ADC soit inférieure à 14 MHz
+	LL_RCC_SetADCClockSource(LL_RCC_ADC_CLKSRC_PCLK2_DIV_8);
 	
 	//init with structure
 	LL_ADC_REG_InitTypeDef myInitStructure;

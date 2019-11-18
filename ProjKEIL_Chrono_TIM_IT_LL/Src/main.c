@@ -42,7 +42,7 @@ int batteryLevel = 0;
 int main(void)
 {
   /* Configure the system clock to 72 MHz */
-  SystemClock_Config();
+	SystemClock_Config();
 	
 	/* Infinite loop */
 	

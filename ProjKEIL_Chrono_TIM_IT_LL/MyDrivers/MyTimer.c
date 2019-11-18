@@ -52,17 +52,14 @@ void MyTimer_Conf(TIM_TypeDef * Timer,int Arr, int Psc)
 	My_LL_Tim_Init_Struct.RepetitionCounter=0;
 	
 	LL_TIM_Init(Timer,&My_LL_Tim_Init_Struct);
+	//on désactive le flag d'interruption activé par défaut
+	//LL_TIM_ClearFlag_UPDATE(Timer);
 	
-
 	// Blocage IT
 	LL_TIM_DisableIT_UPDATE(Timer);
 	
-	
 	// Blocage Timer
 	LL_TIM_DisableCounter(Timer);
-	
-
-		
 }
 
 

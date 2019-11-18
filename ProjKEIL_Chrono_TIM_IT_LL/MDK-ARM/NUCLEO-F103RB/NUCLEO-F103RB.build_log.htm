@@ -21,13 +21,44 @@ Target DLL:      UL2CM3.DLL V1.160.12.0
 Dialog DLL:      TARMSTM.DLL V1.66.0.0
  
 <h2>Project:</h2>
-U:\Voilier\Projet_Voilier\ProjKEIL_Chrono_TIM_IT_LL\MDK-ARM\Project.uvprojx
-Project File Date:  11/12/2019
+U:\Windows\Bureau\ADC_Voilier\Projet_Voilier\ProjKEIL_Chrono_TIM_IT_LL\MDK-ARM\Project.uvprojx
+Project File Date:  11/18/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'NUCLEO-F103RB'
-"NUCLEO-F103RB\NUCLEO-F103RB.axf" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Simulateur'
+compiling PWM_Input_Driver.c...
+compiling UART_Driver.c...
+compiling Codeur_Incr_Driver.c...
+compiling PWM_Output_Driver.c...
+compiling stm32f1xx_ll_rcc.c...
+compiling stm32f1xx_ll_utils.c...
+compiling MyTimer.c...
+compiling main.c...
+..\MyDrivers\ADC_Driver.h(6): warning:  #1295-D: Deprecated declaration startADC - give arg types
+  void startADC();
+..\MyDrivers\ADC_Driver.h(11): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Src/main.c: 2 warnings, 0 errors
+compiling Chrono.c...
+..\Services\Chrono.c(33): warning:  #177-D: variable "my_LL_GPIO_Init_Struct"  was declared but never referenced
+  	LL_GPIO_InitTypeDef my_LL_GPIO_Init_Struct ;
+..\Services\Chrono.c: 1 warning, 0 errors
+assembling startup_stm32f103xb.s...
+compiling stm32f1xx_ll_tim.c...
+compiling ADC_Driver.c...
+..\MyDrivers\ADC_Driver.h(6): warning:  #1295-D: Deprecated declaration startADC - give arg types
+  void startADC();
+..\MyDrivers\ADC_Driver.h(11): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\MyDrivers\ADC_Driver.c: 2 warnings, 0 errors
+compiling stm32f1xx_ll_gpio.c...
+compiling stm32f1xx_ll_usart.c...
+compiling stm32f1xx_ll_adc.c...
+compiling system_stm32f1xx.c...
+linking...
+Program Size: Code=2428 RO-data=268 RW-data=60 ZI-data=1028  
+"NUCLEO-F103RB\NUCLEO-F103RB.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -43,14 +74,14 @@ Package Vendor: Keil
                 STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
 
 <h2>Collection of Component include folders:</h2>
-  .\RTE\_NUCLEO-F103RB
+  .\RTE\_Simulateur
   C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.1.1
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:06
 </pre>
 </body>
 </html>

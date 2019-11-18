@@ -8,7 +8,7 @@ typedef struct {
 }PWM_IN_TypeDef;
 
 PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer);
-double get_duty_cycle(PWM_IN_TypeDef * pwm);
-double get_period(PWM_IN_TypeDef * pwm);
+int get_duty_cycle(PWM_IN_TypeDef * pwm);
+int get_period(PWM_IN_TypeDef * pwm);
 
 #endif

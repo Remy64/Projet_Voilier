@@ -23,6 +23,7 @@
 #include "Ecoute.h"
 #include "Plate.h"
 #include "Chrono.h"
+#include "RX_Rcv.h"
 
 void  SystemClock_Config(void);
 
@@ -83,7 +84,7 @@ int main(void)
 	//END SECTION 1
 	*/
 	
-	
+	/*
 	//SECTION 2: TEST PWM_CONF FOR COMPONENT : ECOUTE
 	//Increases angle from 0 to 180 by 10 degrees steps then stops PWM
 	//WATCH PA8
@@ -100,6 +101,7 @@ int main(void)
 	}
 	set_angle_ecoute(0);
 	//END SECTION 2
+	*/
 	
 	
 	/*
@@ -126,6 +128,37 @@ int main(void)
 	TIM2->CCER &= ~TIM_CCER_CC2E;
 	//END SECTION 3
 	*/
+	
+	//SECTION 4 TEST PWM_IN FOR COMPONENT : RX_RCV
+	//Stores pwm period and duty cycles
+	/*
+	
+054D
+
+00BF
+0090
+0071
+	*/
+	conf_pwm_plate();
+	set_orientation(1);
+	int period;
+	int duty;
+	double ratio;
+	conf_pwm_in_rx_rcv();
+	while(1){
+		period = get_pwm_in_period();
+		duty = get_pwm_in_duty();
+		ratio = get_pwm_in_ratio();
+		if(duty>170){
+			turn(1,10.0);
+		}
+		else if(duty<130){
+			turn(0,10.0);
+		}
+		else{
+			forward();
+		}
+	}
 	
 		
 }
@@ -159,7 +192,7 @@ void SystemClock_Config(void)
   /* Enable HSE oscillator */
 	// ********* Commenter la ligne ci-dessous pour MCBSTM32 *****************
 	// ********* Conserver la ligne si Nucléo*********************************
-  LL_RCC_HSE_EnableBypass();
+  //LL_RCC_HSE_EnableBypass();
   LL_RCC_HSE_Enable();
   while(LL_RCC_HSE_IsReady() != 1)
   {

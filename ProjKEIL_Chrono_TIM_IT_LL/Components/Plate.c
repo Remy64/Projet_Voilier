@@ -26,3 +26,10 @@ void set_orientation(char orientation){
 		set_PWM_RATIO(&pwm_orientation,0);
 	}
 }
+void turn(char orientation,double voltage){
+		set_orientation(orientation);
+		set_servo_mean_voltage(voltage);
+}
+void forward(void){
+	set_servo_mean_voltage(0.0);
+}

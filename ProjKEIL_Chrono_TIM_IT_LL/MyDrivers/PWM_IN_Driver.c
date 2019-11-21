@@ -15,8 +15,8 @@ PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer){
 	timer -> CCER &=~TIM_CCER_CC1P;
 	
 	//CC2S bits to 10
-	timer -> CCMR2 |=TIM_CCMR1_CC2S_1;
- 	timer -> CCMR2 &=~TIM_CCMR1_CC2S_0;
+	timer -> CCMR1 |= TIM_CCMR1_CC2S_1;
+ 	timer -> CCMR1 &=~TIM_CCMR1_CC2S_0;
 	
 	timer -> CCER |=TIM_CCER_CC2P;
 	
@@ -36,6 +36,7 @@ PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer){
 	
 	timer -> DIER |= LL_TIM_DIER_CC1IE;
 	timer -> DIER |= LL_TIM_DIER_CC2IE;
+	LL_TIM_SetPrescaler(timer,719);
 	LL_TIM_EnableIT_UPDATE(timer);
 	LL_TIM_EnableCounter(timer);
 	return pwm;

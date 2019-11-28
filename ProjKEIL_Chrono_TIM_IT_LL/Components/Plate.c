@@ -18,6 +18,13 @@ void conf_pwm_plate(void){//Timer 2;Port A1;Channel 2;50Hz
 void set_servo_mean_voltage(double mean_voltage){
 	set_PWM_RATIO(&pwm_plate,mean_voltage/GLOBAL_VOLTAGE);
 }
+
+//range 5V-10V
+double find_voltage_from_ratio (double ratio){
+	return 5.0+(5.0*ratio);
+}
+
+
 void set_orientation(char orientation){
 	if(orientation){
 		set_PWM_RATIO(&pwm_orientation,1);
@@ -26,9 +33,9 @@ void set_orientation(char orientation){
 		set_PWM_RATIO(&pwm_orientation,0);
 	}
 }
-void turn(char orientation,double voltage){
+void turn(char orientation,double ratio){
 		set_orientation(orientation);
-		set_servo_mean_voltage(voltage);
+		set_servo_mean_voltage(find_voltage_from_ratio(ratio));
 }
 void forward(void){
 	set_servo_mean_voltage(0.0);

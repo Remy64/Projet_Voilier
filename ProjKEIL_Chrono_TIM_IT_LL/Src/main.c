@@ -24,6 +24,7 @@
 #include "Plate.h"
 #include "Chrono.h"
 #include "RX_Rcv.h"
+#include "stdlib.h"
 
 void  SystemClock_Config(void);
 
@@ -143,17 +144,24 @@ int main(void)
 	set_orientation(1);
 	int period;
 	int duty;
+	int range_from_zero;
 	double ratio;
 	conf_pwm_in_rx_rcv();
 	while(1){
 		period = get_pwm_in_period();
 		duty = get_pwm_in_duty();
-		ratio = get_pwm_in_ratio();
-		if(duty>170){
-			turn(1,10.0);
+		//ratio = get_pwm_in_ratio();
+		
+		range_from_zero = duty-153;
+		
+		
+		if(range_from_zero>3){
+			turn(1,ratio);
+			ratio = abs(range_from_zero)/25;
 		}
-		else if(duty<130){
-			turn(0,10.0);
+		else if(range_from_zero<-3){
+			turn(0,ratio);
+			ratio = abs(range_from_zero)/35;
 		}
 		else{
 			forward();

@@ -154,8 +154,10 @@ int main(void)
 		
 		range_from_zero = duty-153;
 		
-		
-		if(range_from_zero>3){
+		if(ratio ==0){//ATTENTION , A AFFINER POUR EVITER ARRACHEMENT DU CABLE
+			forward();
+		}
+		else if(range_from_zero>3){
 			turn(1,ratio);
 			ratio = abs(range_from_zero)/25;
 		}

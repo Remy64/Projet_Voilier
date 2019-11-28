@@ -5,10 +5,9 @@ void conf_pwm_in_rx_rcv(void){
 	LL_GPIO_SetPinMode(GPIOB,LL_GPIO_PIN_6,LL_GPIO_MODE_INPUT);
 	LL_GPIO_SetPinMode(GPIOB,LL_GPIO_PIN_7,LL_GPIO_MODE_INPUT);
 	pwm_rx_rcv=conf_pwm_in(TIM4);
-	
 }
 double get_pwm_in_ratio(void){
-	return get_duty_cycle(&pwm_rx_rcv) / get_period(&pwm_rx_rcv);//Assuming duty_cycle is expressed in time unit and not already in %
+	return ((1.0*get_duty_cycle(&pwm_rx_rcv)) / (1.0*get_period(&pwm_rx_rcv)));//Assuming duty_cycle is expressed in time unit and not already in %
 };
 char get_orientation(void){
 	return 0;//TODO

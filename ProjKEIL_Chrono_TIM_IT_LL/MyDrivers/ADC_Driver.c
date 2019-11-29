@@ -14,6 +14,9 @@ static int batteryLevel = 0;
 static int currentChannel = 0;
 
 void startConversion(void) {
+	LL_ADC_Enable(ADC);
+	LL_ADC_Enable(ADC);
+	
 	if(currentChannel == 0) {
 		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_10);
 	} else if(currentChannel == 1) {
@@ -36,6 +39,8 @@ void startConversion(void) {
 	
 	currentChannel++;
 	currentChannel%=3;
+	
+	LL_ADC_Disable(ADC);
 }
 
 int getX(void) {

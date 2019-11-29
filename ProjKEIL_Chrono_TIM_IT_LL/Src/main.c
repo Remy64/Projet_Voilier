@@ -150,7 +150,7 @@ int main(void)
 	while(1){
 		period = get_pwm_in_period();
 		duty = get_pwm_in_duty();
-		//ratio = get_pwm_in_ratio();
+		ratio = get_pwm_in_ratio();
 		
 		range_from_zero = duty-153;
 		
@@ -159,11 +159,11 @@ int main(void)
 		}
 		else if(range_from_zero>3){
 			turn(1,ratio);
-			ratio = abs(range_from_zero)/25;
+			ratio = abs(range_from_zero)/25.0;
 		}
 		else if(range_from_zero<-3){
 			turn(0,ratio);
-			ratio = abs(range_from_zero)/35;
+			ratio = abs(range_from_zero)/35.0;
 		}
 		else{
 			forward();

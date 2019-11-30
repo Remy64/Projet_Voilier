@@ -36,14 +36,22 @@ void Config_Usart(USART_TypeDef * Usart){
 	LL_USART_Enable(Usart);
 }
 
-char * recupererHeure(void) {
-  time_t t = time(NULL);
-  struct tm tm = *localtime(&t);
-	char* str_out = malloc(sizeof(char)*22);
-  sprintf(str_out, "%d/%d/%d : %d:%d:%d", tm.tm_mday,  tm.tm_mon + 1,  tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec);
-	return str_out;
+void transmitAlert(USART_TypeDef * Usart) {
+	LL_USART_TransmitData8(Usart,'l');
+	LL_USART_TransmitData8(Usart,'o');
+	LL_USART_TransmitData8(Usart,'w');
+	LL_USART_TransmitData8(Usart,' ');
+	LL_USART_TransmitData8(Usart,'b');
+	LL_USART_TransmitData8(Usart,'a');
+	LL_USART_TransmitData8(Usart,'t');
+	LL_USART_TransmitData8(Usart,'t');
+	LL_USART_TransmitData8(Usart,'e');
+	LL_USART_TransmitData8(Usart,'r');
+	LL_USART_TransmitData8(Usart,'y');
+	
+	
 }
-
+	
 void set_rtc(void) {
 	LL_RTC_InitTypeDef initStructRTC;
 	initStructRTC.AsynchPrescaler = ;

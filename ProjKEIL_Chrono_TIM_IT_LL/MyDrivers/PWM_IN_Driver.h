@@ -3,6 +3,14 @@
 #include "MyTimer.h"
 #include "stm32f1xx_ll_tim.h"
 
+/*
+PWM_IN caracteritics	
+054D period
+
+00BF duty max
+0090 duty middle
+0071 duty min
+	*/
 typedef struct {
 	TIM_TypeDef * timer;
 }PWM_IN_TypeDef;

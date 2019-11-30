@@ -25,6 +25,9 @@
 #include "Chrono.h"
 #include "RX_Rcv.h"
 #include "stdlib.h"
+#include "ADC_Driver.h"
+#include "Accel.h"
+#include "codeur_incremental_driver.h"
 
 void  SystemClock_Config(void);
 
@@ -130,30 +133,59 @@ int main(void)
 	//END SECTION 3
 	*/
 	
-	//SECTION 4 TEST PWM_IN FOR COMPONENT : RX_RCV
-	//Stores pwm period and duty cycles
-	/*
+	//MAIN : Store values from gir, accel, rx and update plate and sail.
 	
-054D
-
-00BF
-0090
-0071
-	*/
+	
+	//Initial config of each component
 	conf_pwm_plate();
+	conf_pwm_ecoute();
+	configure_codeur();
+	configureADC(ADC1,TIM1);
+	
+	//Plate settings
 	set_orientation(1);
-	int period;
 	int duty;
 	int range_from_zero;
 	double ratio;
 	conf_pwm_in_rx_rcv();
+	//
+	
+	//Gir settings
+	volatile double angleAlpha; //Current angle of the boat relative to the direction of the wind
+	char direction; //Check if the boat if sailing with the wind on babord or tribod
+	//
+	
+	//Accel settings
+	volatile double accelX;
+	volatile double accelY;
+	int * directY;
+	int * directX;
+	double cos_rollAngleBeta; //Current angle of the boat relative to the vertical axis
+	//
+	
+	//Sail settings
+	double sailAngleTheta; 
+	//
+	
+	//A little bit of physics : 
+	double g = 9.806;
+	// mx, my, beta  = accelX, accelY, rollAngleBeta
+	//->mx + ->my = ->g
+	//cos beta = my/g
+	//beta = arccos (my/g)
+	//Critical angle (cf specs) : 45 degrees, cos 45 = cos pi/4 = sqrt(2)/2 ~= 0.707
+	//Same on both side : cos(-x) = cos (x)
+	double cos_critical_roll_angle = 0.707;
+	volatile double test_angle = 0.0;
+	char test_dir = 0;
+	int test_i = 0;
+	
 	while(1){
-		period = get_pwm_in_period();
+		
+		//Rx and plate management
 		duty = get_pwm_in_duty();
 		ratio = get_pwm_in_ratio();
-		
 		range_from_zero = duty-153;
-		
 		if(ratio ==0){//ATTENTION , A AFFINER POUR EVITER ARRACHEMENT DU CABLE
 			forward();
 		}
@@ -168,6 +200,33 @@ int main(void)
 		else{
 			forward();
 		}
+		//
+		
+		//Sail management
+		accelX = get_accel_x();
+		accelY = get_accel_y();
+		directX = getXref();
+		directY = getYRef();
+		
+		cos_rollAngleBeta = accelY/g;
+		if(cos_rollAngleBeta < cos_critical_roll_angle){
+			set_angle_ecoute(0);//TODO
+		}
+		else{
+			angleAlpha = 180-mesurer_angle()*1.0;
+			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
+			if(absAlpha<=45){
+				set_angle_ecoute(180);//TODO
+			}
+			else{
+				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));
+			}
+		}
+
+		
+		
+		
+		//
 	}
 	
 		

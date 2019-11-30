@@ -7,7 +7,6 @@ PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer){
 	else if (timer==TIM2) LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
 	else if (timer==TIM3) LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
 	else  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM4);
-	
 	//CC1S bits to _1
 	timer -> CCMR1 |=TIM_CCMR1_CC1S_0;
 	timer -> CCMR1 &=~TIM_CCMR1_CC1S_1;

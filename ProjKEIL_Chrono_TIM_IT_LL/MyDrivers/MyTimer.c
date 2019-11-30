@@ -14,7 +14,7 @@
 #include "MyTimer.h"
 #include "stm32f1xx_ll_bus.h" // Pour l'activation des horloges
 #include "stm32f1xx_ll_tim.h" 
-
+ 
 
 // variable pointeur de fonction permettant de mémoriser le callback à appeler depuis
 // le handler d'IT
@@ -22,6 +22,7 @@ void (*Ptr_ItFct_TIM1)(void);
 void (*Ptr_ItFct_TIM2)(void); 
 void (*Ptr_ItFct_TIM3)(void); 
 void (*Ptr_ItFct_TIM4)(void); 
+void (*Ptr_ItFct_TIM5)(void); 
 
 
 
@@ -42,7 +43,9 @@ void MyTimer_Conf(TIM_TypeDef * Timer,int Arr, int Psc)
 	if (Timer==TIM1) LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM1);
 	else if (Timer==TIM2) LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
 	else if (Timer==TIM3) LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
-	else  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM4);
+	else if (Timer==TIM4) LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM4);
+	
+	
 	// chargement structure Arr, Psc, Up Count
 	My_LL_Tim_Init_Struct.Autoreload=Arr;
 	My_LL_Tim_Init_Struct.Prescaler=Psc;

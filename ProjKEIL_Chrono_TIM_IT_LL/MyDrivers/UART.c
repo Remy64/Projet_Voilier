@@ -4,6 +4,7 @@
 #include "stm32f1xx_ll_bus.h"
 #include "stm32f1xx_ll_rcc.h"
 #include "stm32f1xx_ll_rtc.h"
+#include "stm32f1xx_ll_i2c.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -76,7 +77,25 @@ void set_rtc(void) {
 	LL_RTC_Init(RTC, &initStructRTC);
 	*/
 	
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_I2C2);
+	LL_I2C_InitTypeDef init;
+	init.ClockSpeed = 4096;
+	init.DutyCycle = LL_I2C_DUTYCYCLE_2;
+	init.PeripheralMode = LL_I2C_MODE_I2C;
+	init.OwnAddrSize = LL_I2C_OWNADDRESS1_7BIT;
+	init.TypeAcknowledge = LL_I2C_ACK;
+	init.OwnAddress1 = 0;
+	LL_I2C_Init(I2C2, &init);
 	
+	while(LL_I2C_IsActiveFlag_BUSY(I2C2)) {}
+	
+	LL_I2C_GenerateStartCondition(I2C2);
+	
+	while(! LL_I2C_IsActiveFlag_SB(I2C2)) {}
+		
+	LL_I2C_TransmitData8 (I2C2, 0xD1);
+	
+	LL_I2C_ClearFlag_ADDR(I2C2);
 }
 
 void getDateTime(void) {

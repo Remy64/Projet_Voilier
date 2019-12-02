@@ -4,7 +4,7 @@ static TIM_TypeDef *TIM;
 static int X = 0;
 static int Y = 0;
 static int batteryLevel = 0;
-static int currentChannel = 0;
+static int currentChannel = 1;
 
 int * getXref(void){
 	return &X;
@@ -17,9 +17,9 @@ void startConversion(void) {
 	LL_ADC_Enable(ADC);
 	LL_ADC_Enable(ADC);
 	
-	if(currentChannel == 0) {
-		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_10);
-	} else if(currentChannel == 1) {
+	/*if(currentChannel == 0) {
+		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_10);*/
+	if(currentChannel == 1) {
 		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_11);
 	} else if(currentChannel == 2) {
 		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_12);
@@ -29,17 +29,16 @@ void startConversion(void) {
 	while(!LL_ADC_IsActiveFlag_EOS(ADC)){}
 	int result = LL_ADC_REG_ReadConversionData32(ADC);
 	
-	if(currentChannel == 0) {
-		X = result;
-	} else if(currentChannel == 1) {
+	if(currentChannel == 1) {
 		Y = result;
 	} else if(currentChannel == 2) {
 		batteryLevel = result;
-	}
+	} 
 	
 	
 	currentChannel++;
 	currentChannel%=3;
+	currentChannel++;
 	
 	LL_ADC_Disable(ADC);
 }

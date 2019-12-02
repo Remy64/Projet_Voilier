@@ -156,10 +156,7 @@ int main(void)
 	//
 	
 	//Accel settings
-	volatile double accelX;
 	volatile double accelY;
-	int * directY;
-	int * directX;
 	double cos_rollAngleBeta; //Current angle of the boat relative to the vertical axis
 	//
 	
@@ -203,12 +200,9 @@ int main(void)
 		//
 		
 		//Sail management
-		accelX = get_accel_x();
 		accelY = get_accel_y();
-		directX = getXref();
-		directY = getYRef();
-		
 		cos_rollAngleBeta = accelY/g;
+		
 		if(cos_rollAngleBeta < cos_critical_roll_angle){
 			set_angle_ecoute(0);//TODO
 		}
@@ -216,7 +210,7 @@ int main(void)
 			angleAlpha = 180-mesurer_angle()*1.0;
 			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
 			if(absAlpha<=45){
-				set_angle_ecoute(180);//TODO
+				//set_angle_ecoute(180);//TODO
 			}
 			else{
 				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));

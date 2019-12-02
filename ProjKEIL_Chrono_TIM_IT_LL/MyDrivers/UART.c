@@ -15,8 +15,13 @@ void Config_Usart(USART_TypeDef * Usart){
 	LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_11,LL_GPIO_OUTPUT_PUSHPULL);
 	
 	//Start USART Clock
-	
-	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
+	if(Usart == USART1) {
+		LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_USART1);
+	} else if(Usart == USART2) {
+		LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART2);
+	} else if(Usart == USART3) {
+		LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_USART3);
+	}
 	
 	
 	//Init USART
@@ -31,7 +36,7 @@ void Config_Usart(USART_TypeDef * Usart){
 	Usart_Init_Struct.OverSampling=LL_USART_OVERSAMPLING_16;
 	Usart_Init_Struct.Parity=LL_USART_PARITY_NONE;
 	
-	LL_USART_Init(Usart,&Usart_Init_Struct);
+	LL_USART_Init(Usart, &Usart_Init_Struct);
 	
 	LL_USART_Enable(Usart);
 }
@@ -53,35 +58,28 @@ void transmitAlert(USART_TypeDef * Usart) {
 }
 	
 void set_rtc(void) {
+	/*
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_BKP);
+	
 	LL_RTC_InitTypeDef initStructRTC;
-	initStructRTC.AsynchPrescaler = ;
+	initStructRTC.AsynchPrescaler = 0;
 	initStructRTC.OutPutSource = LL_RTC_CALIB_OUTPUT_RTCCLOCK;
-
-	LL_PWR_EnableBkUpAccess();
-	LL_RCC_ForceBackupDomainReset();
-	LL_RCC_ReleaseBackupDomainReset();
-
+	
 	LL_RCC_LSE_Enable();
 
-	/* Wait untill LSE is ready */
-	while (LL_RCC_LSE_IsReady() != 1) {};
+	// Wait untill LSE is ready
+	while (LL_RCC_LSE_IsReady() != 1) {}
 
 	LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
-
 	LL_RCC_EnableRTC();
-
-	if (LL_RTC_DeInit(RTC) != SUCCESS) {
-			return -EIO;
-	}
-
-	if (LL_RTC_Init(RTC, (LL_RTC_InitTypeDef *)&initData) != SUCCESS) {
-			return -EIO;
-	}
-
-	LL_RTC_EnableShadowRegBypass(RTC);
+	LL_RTC_Init(RTC, &initStructRTC);
+	*/
+	
+	
 }
 
-char * getDateTime(void) {
+void getDateTime(void) {
 	// 0x00HHMMSS in bcd format
 	int t = LL_RTC_TIME_Get(RTC);
 }

@@ -28,6 +28,7 @@
 #include "ADC_Driver.h"
 #include "Accel.h"
 #include "codeur_incremental_driver.h"
+#include "MyTimer.h"
 
 void  SystemClock_Config(void);
 
@@ -39,6 +40,29 @@ void  SystemClock_Config(void);
   * @retval None
   */
 	int view;
+double g = 9.806;
+double cos_critical_roll_angle = 0.707;
+void sail_management(){
+			//Sail management
+		double accelY = get_accel_y();
+		double cos_rollAngleBeta = accelY/g;
+		
+		if(cos_rollAngleBeta < cos_critical_roll_angle){
+			set_angle_ecoute(0);//TODO
+		}
+		else{
+			double angleAlpha = 180-mesurer_angle()*1.0;
+			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
+			if(absAlpha<=45){
+				set_angle_ecoute(180);//TODO
+			}
+			else{
+				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));
+				
+			}
+		}
+
+}
 
 
 // R:\LLGDB\CubeF1\Drivers\STM32F1xx_HAL_Driver\HTML
@@ -141,12 +165,15 @@ int main(void)
 	conf_pwm_ecoute();
 	configure_codeur();
 	configureADC(ADC1,TIM1);
+	MyTimer_IT_Conf(TIM2, sail_management, 2);
+	MyTimer_IT_Enable(TIM2);
 	
 	//Plate settings
+	//7E = 126 99 = 153 B5 181 
 	set_orientation(1);
-	int duty;
+	volatile int duty;
 	int range_from_zero;
-	double ratio;
+	volatile double ratio;
 	conf_pwm_in_rx_rcv();
 	//
 	
@@ -183,22 +210,21 @@ int main(void)
 		duty = get_pwm_in_duty();
 		ratio = get_pwm_in_ratio();
 		range_from_zero = duty-153;
-		if(ratio ==0){//ATTENTION , A AFFINER POUR EVITER ARRACHEMENT DU CABLE
+		double abs_range = abs(range_from_zero)/27.5;
+		if(ratio == 0){//ATTENTION , A AFFINER POUR EVITER ARRACHEMENT DU CABLE
 			forward();
 		}
 		else if(range_from_zero>3){
-			turn(1,ratio);
-			ratio = abs(range_from_zero)/25.0;
+			turn(1,abs_range);
 		}
 		else if(range_from_zero<-3){
-			turn(0,ratio);
-			ratio = abs(range_from_zero)/35.0;
+			turn(0,abs_range);
 		}
 		else{
 			forward();
 		}
 		//
-		
+		/*
 		//Sail management
 		accelY = get_accel_y();
 		cos_rollAngleBeta = accelY/g;
@@ -210,12 +236,13 @@ int main(void)
 			angleAlpha = 180-mesurer_angle()*1.0;
 			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
 			if(absAlpha<=45){
-				//set_angle_ecoute(180);//TODO
+				set_angle_ecoute(90);//TODO
 			}
 			else{
 				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));
 			}
 		}
+		*/
 
 		
 		

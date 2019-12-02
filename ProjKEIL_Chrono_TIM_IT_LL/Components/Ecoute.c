@@ -2,7 +2,7 @@
 //Constantes à vérifier
 const double ANGLE_MAX = 180;
 const double ANGLE_MIN = 0;
-const double TH_MAX = 0.0019;
+const double TH_MAX = 0.0015;
 const double TH_MIN = 0.001;
 PWM_TypeDef pwm_ecoute;
 void conf_pwm_ecoute(){//Timer 1;Port A8;Channel 1;50Hz

@@ -29,6 +29,7 @@
 #include "Accel.h"
 #include "codeur_incremental_driver.h"
 #include "MyTimer.h"
+#include "UART.h"
 
 void  SystemClock_Config(void);
 
@@ -46,7 +47,7 @@ void sail_management(){
 			//Sail management
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
-		
+		//transmitAlert(USART1);
 		if(cos_rollAngleBeta < cos_critical_roll_angle){
 			set_angle_ecoute(0);//TODO
 		}
@@ -190,6 +191,9 @@ int main(void)
 	//Sail settings
 	double sailAngleTheta; 
 	//
+	
+	//USART settings
+	 Config_Usart(USART1);
 	
 	//A little bit of physics : 
 	double g = 9.806;

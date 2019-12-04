@@ -20,7 +20,7 @@ Les fonctionnalités implémentées dans les fichiers Drivers sont:
 
 * Codeur incrémental (codeur_inc)
 
-* 
+* Une module d'émission UART permettant d'envoyer des données via un démodulateur
 
 Les fonctionnalités haut-niveau s'appuyant sur ces drivers sont : 
 
@@ -34,7 +34,7 @@ Les fonctionnalités haut-niveau s'appuyant sur ces drivers sont :
 
 * La réception des instructions de la télécommande (Rx_Rcv), qui utilise une PWM en entrée pour obtenir les informations de direction et de puissance de la télécommande.
 
-*
+* L'avertissement via l'USART du niveau de batterie du voilier
 
 Le main initialise dans un premier temps chacun des composants matériels utilisés. Puis, une tâche est configuré via un timer pour gérer en interruption la tension de l'écoute selon l'angle au vent du voilier et son roulis(calculé directement à partir de la valeur d'accélération en Y). 
 La boucle principale du main gère la réception en continue des instructions de la télécommande et impose la rotation correspondante au plateau.

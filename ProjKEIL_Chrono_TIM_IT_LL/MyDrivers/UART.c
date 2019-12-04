@@ -11,9 +11,17 @@ void Config_Usart(USART_TypeDef * Usart){
 
 	//Set pin PA9 ( TX ) in alternate push pull
 
-	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_11,LL_GPIO_MODE_ALTERNATE);
+	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_9,LL_GPIO_MODE_ALTERNATE);
 
-	LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_11,LL_GPIO_OUTPUT_PUSHPULL);
+	LL_GPIO_SetPinOutputType(GPIOA,LL_GPIO_PIN_9,LL_GPIO_OUTPUT_PUSHPULL);
+	
+	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_11,LL_GPIO_MODE_OUTPUT);
+	
+	LL_GPIO_SetOutputPin(GPIOA,LL_GPIO_PIN_11);
+	
+	
+	
+	
 
 	
 
@@ -76,12 +84,15 @@ void transmitAlert(USART_TypeDef * Usart) {
 	while(!LL_USART_IsActiveFlag_TXE(Usart)) {}
 	LL_USART_TransmitData8(Usart,'l');
 
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'o');
 
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'w');
 
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,' ');
-
+/*
 	LL_USART_TransmitData8(Usart,'b');
 
 	LL_USART_TransmitData8(Usart,'a');
@@ -95,6 +106,7 @@ void transmitAlert(USART_TypeDef * Usart) {
 	LL_USART_TransmitData8(Usart,'r');
 
 	LL_USART_TransmitData8(Usart,'y');
+	*/
 
 	
 

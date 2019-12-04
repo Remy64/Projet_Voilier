@@ -47,7 +47,10 @@ void sail_management(){
 			//Sail management
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
-		//transmitAlert(USART1);
+		double battery = getBatteryLevel();
+		if(battery < 10){
+			transmitAlert(USART1);
+		}
 		if(cos_rollAngleBeta < cos_critical_roll_angle){
 			set_angle_ecoute(0);//TODO
 		}
@@ -168,6 +171,8 @@ int main(void)
 	configureADC(ADC1,TIM1);
 	MyTimer_IT_Conf(TIM2, sail_management, 2);
 	MyTimer_IT_Enable(TIM2);
+	Config_Usart(USART1);
+	
 	
 	//Plate settings
 	//7E = 126 99 = 153 B5 181 
@@ -211,11 +216,13 @@ int main(void)
 	while(1){
 		
 		//Rx and plate management
+		transmitAlert(USART1);
+		
 		duty = get_pwm_in_duty();
 		ratio = get_pwm_in_ratio();
 		range_from_zero = duty-153;
 		double abs_range = abs(range_from_zero)/27.5;
-		if(ratio == 0){//ATTENTION , A AFFINER POUR EVITER ARRACHEMENT DU CABLE
+		if(ratio == 0){
 			forward();
 		}
 		else if(range_from_zero>3){
@@ -227,31 +234,6 @@ int main(void)
 		else{
 			forward();
 		}
-		//
-		/*
-		//Sail management
-		accelY = get_accel_y();
-		cos_rollAngleBeta = accelY/g;
-		
-		if(cos_rollAngleBeta < cos_critical_roll_angle){
-			set_angle_ecoute(0);//TODO
-		}
-		else{
-			angleAlpha = 180-mesurer_angle()*1.0;
-			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
-			if(absAlpha<=45){
-				set_angle_ecoute(90);//TODO
-			}
-			else{
-				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));
-			}
-		}
-		*/
-
-		
-		
-		
-		//
 	}
 	
 		

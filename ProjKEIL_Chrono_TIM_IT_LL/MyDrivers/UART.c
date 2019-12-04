@@ -91,10 +91,12 @@ void set_rtc(void) {
 	
 	LL_I2C_GenerateStartCondition(I2C2);
 	
-	while(! LL_I2C_IsActiveFlag_SB(I2C2)) {}
+	while(!LL_I2C_IsActiveFlag_SB(I2C2)) {}
 		
 	LL_I2C_TransmitData8 (I2C2, 0xD1);
 	
+	while(!LL_I2C_IsActiveFlag_ADDR(I2C2)) {}
+		
 	LL_I2C_ClearFlag_ADDR(I2C2);
 }
 

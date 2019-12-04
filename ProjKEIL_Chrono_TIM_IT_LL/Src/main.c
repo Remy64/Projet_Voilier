@@ -40,9 +40,16 @@ void  SystemClock_Config(void);
   * @param  None
   * @retval None
   */
-	int view;
+int view;
 double g = 9.806;
 double cos_critical_roll_angle = 0.707;
+//A little bit of physics : 
+// mx, my, beta  = accelX, accelY, rollAngleBeta
+//->mx + ->my = ->g
+//cos beta = my/g
+//beta = arccos (my/g)
+//Critical angle (cf specs) : 45 degrees, cos 45 = cos pi/4 = sqrt(2)/2 ~= 0.707
+//Same on both side : cos(-x) = cos (x)
 void sail_management(){
 			//Sail management
 		double accelY = get_accel_y();
@@ -184,39 +191,16 @@ int main(void)
 	//
 	
 	//Gir settings
-	volatile double angleAlpha; //Current angle of the boat relative to the direction of the wind
-	char direction; //Check if the boat if sailing with the wind on babord or tribod
 	//
 	
 	//Accel settings
-	volatile double accelY;
-	double cos_rollAngleBeta; //Current angle of the boat relative to the vertical axis
 	//
 	
-	//Sail settings
-	double sailAngleTheta; 
-	//
 	
 	//USART settings
 	 Config_Usart(USART1);
-	
-	//A little bit of physics : 
-	double g = 9.806;
-	// mx, my, beta  = accelX, accelY, rollAngleBeta
-	//->mx + ->my = ->g
-	//cos beta = my/g
-	//beta = arccos (my/g)
-	//Critical angle (cf specs) : 45 degrees, cos 45 = cos pi/4 = sqrt(2)/2 ~= 0.707
-	//Same on both side : cos(-x) = cos (x)
-	double cos_critical_roll_angle = 0.707;
-	volatile double test_angle = 0.0;
-	char test_dir = 0;
-	int test_i = 0;
-	
 	while(1){
-		
 		//Rx and plate management
-		transmitAlert(USART1);
 		
 		duty = get_pwm_in_duty();
 		ratio = get_pwm_in_ratio();

@@ -6,6 +6,6 @@
 void conf_pwm_plate(void);//Timer 2;Port A1;Channel 2;50Hz
 void set_servo_mean_voltage(double mean_voltage);//Set the PWM high period to generate a mean signal of [mean_voltage]V
 void set_orientation(char orientation);
-void turn(char orientation,double ratio);
-void forward(void);
+void turn(char orientation,double ratio);//Turn the plate clockwise/anticlockwise if orientation = 0/1. Ratio is the fraction of the plate max speed to apply.
+void forward(void);//Stop the rotation of the plate
 #endif

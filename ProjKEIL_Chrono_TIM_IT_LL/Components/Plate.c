@@ -1,7 +1,7 @@
 #include "Plate.h"
-const double GLOBAL_VOLTAGE =12.0;
+const double GLOBAL_VOLTAGE = 12.0;
 PWM_TypeDef pwm_plate;
-PWM_TypeDef pwm_orientation;
+PWM_TypeDef pwm_orientation;//We initially thought the orientation also had to be controlled via a PWM signal.
 void conf_pwm_plate(void){//Timer 2;Port A1;Channel 2;50Hz
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_1,LL_GPIO_MODE_ALTERNATE);
@@ -13,7 +13,7 @@ void conf_pwm_plate(void){//Timer 2;Port A1;Channel 2;50Hz
 	TIM2->CCER |= TIM_CCER_CC2E;
 	TIM2->CCER |= TIM_CCER_CC3E;
 	TIM2->BDTR |= TIM_BDTR_MOE;
-	
+
 }
 void set_servo_mean_voltage(double mean_voltage){
 	set_PWM_RATIO(&pwm_plate,mean_voltage/GLOBAL_VOLTAGE);

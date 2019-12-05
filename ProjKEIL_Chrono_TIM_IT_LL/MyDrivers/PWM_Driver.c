@@ -12,12 +12,15 @@ PWM_TypeDef init_PWM(TIM_TypeDef * timer,int freq,int ch){
 		case 3:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH3,LL_TIM_OCMODE_PWM1);break;
 		default:LL_TIM_OC_SetMode(timer,LL_TIM_CHANNEL_CH4,LL_TIM_OCMODE_PWM1);break;
 	}
+	
+	//Struct init
 	pwm.timer=timer;
 	pwm.freq=freq;
 	pwm.compare=compare;
 	pwm.ch=ch;
+	
 	set_PWM_COMPARE(&pwm,compare);//Define PWM duty cycle
-	LL_TIM_EnableCounter(timer);
+	LL_TIM_EnableCounter(timer);//Start the PWM
 	return pwm;
 	
 }

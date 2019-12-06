@@ -30,6 +30,7 @@
 #include "codeur_incremental_driver.h"
 #include "MyTimer.h"
 #include "UART.h"
+#include "Battery.h"
 
 void  SystemClock_Config(void);
 
@@ -54,8 +55,8 @@ void sail_management(){
 			//Sail management
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
-		double battery = getBatteryLevel();
-		if(1 || (battery < 10)){
+		double battery = BATTERY_LVL();
+		if((battery < 10)){
 			transmitAlert(USART1);
 		}
 		if(cos_rollAngleBeta < cos_critical_roll_angle){
@@ -84,9 +85,6 @@ int main(void)
   /* Configure the system clock to 72 MHz */
   SystemClock_Config();
 	
-//PWM TESTS
-//UNCOMMENT EACH SECTIONS INDIVIDUALLY TO PERFORM TESTS
-	
 
 	
 	//Initial config of each component
@@ -100,8 +98,6 @@ int main(void)
 	
 	Config_Usart(USART1);
 	
-	set_rtc() ;
-	
 	//Launches parallel sail management
 	MyTimer_IT_Conf(TIM2, sail_management, 2);
 	MyTimer_IT_Enable(TIM2);
@@ -109,11 +105,11 @@ int main(void)
 	
 	
 	//Plate settings
-	//7E = 126 99 = 153 B5 181 
+
 	set_orientation(1);
 	int duty;
 	int range_from_zero;
-	volatile double ratio;
+	double ratio;
 	conf_pwm_in_rx_rcv();
 	//
 	 

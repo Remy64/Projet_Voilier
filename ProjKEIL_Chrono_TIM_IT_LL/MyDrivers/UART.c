@@ -76,44 +76,39 @@ void Config_Usart(USART_TypeDef * Usart){
 
 
 void transmitAlert(USART_TypeDef * Usart) {
-	/*
-	while(!LL_USART_IsActiveFlag_TXE(Usart)) {}
-	LL_USART_TransmitData8(Usart,'l');
-
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'o');
-
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'w');
-	*/
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'H');
 	
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,getDateTime());
+	while(!LL_USART_IsActiveFlag_TXE(Usart)) {}
+	LL_USART_TransmitData8(Usart,'L');
 
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
+	LL_USART_TransmitData8(Usart,'O');
+
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
+	LL_USART_TransmitData8(Usart,'W');
+		/*
 	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,' ');
-/*
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'b');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'a');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'t');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'t');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'e');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'r');
-
+	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'y');
 	*/
+	
 }
 
 	
 
-void set_rtc(void) {
+void set_rtc(void) {//TODO
 
 	/*
 

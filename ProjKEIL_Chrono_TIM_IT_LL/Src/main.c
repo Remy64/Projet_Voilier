@@ -55,7 +55,7 @@ void sail_management(){
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
 		double battery = getBatteryLevel();
-		if(battery < 10){
+		if(1 || (battery < 10)){
 			transmitAlert(USART1);
 		}
 		if(cos_rollAngleBeta < cos_critical_roll_angle){
@@ -87,6 +87,57 @@ int main(void)
 //PWM TESTS
 //UNCOMMENT EACH SECTIONS INDIVIDUALLY TO PERFORM TESTS
 	
+
+	
+	//Initial config of each component
+	conf_pwm_plate();
+	
+	conf_pwm_ecoute();
+	
+	configure_codeur();
+	
+	configureADC(ADC1,TIM1);
+	
+	Config_Usart(USART1);
+	
+	set_rtc() ;
+	
+	//Launches parallel sail management
+	MyTimer_IT_Conf(TIM2, sail_management, 2);
+	MyTimer_IT_Enable(TIM2);
+
+	
+	
+	//Plate settings
+	//7E = 126 99 = 153 B5 181 
+	set_orientation(1);
+	int duty;
+	int range_from_zero;
+	volatile double ratio;
+	conf_pwm_in_rx_rcv();
+	//
+	 
+//Treatment of RX reception and plate management
+	while(1){
+		
+		
+		duty = get_pwm_in_duty();
+		ratio = get_pwm_in_ratio();
+		range_from_zero = duty-153;
+		double abs_range = abs(range_from_zero)/27.5;
+		if(ratio == 0){
+			forward();
+		}
+		else if(range_from_zero>3){
+			turn(1,abs_range);
+		}
+		else if(range_from_zero<-3){
+			turn(0,abs_range);
+		}
+		else{
+			forward();
+		}
+	}
 	/*
 	//SECTION 1 : MANUAL TEST PWM DRIVER PORT A8 TIMER 1
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
@@ -167,58 +218,6 @@ int main(void)
 	TIM2->CCER &= ~TIM_CCER_CC2E;
 	//END SECTION 3
 	*/
-	
-	//MAIN : Store values from gir, accel, rx and update plate and sail.
-	
-	
-	//Initial config of each component
-	conf_pwm_plate();
-	conf_pwm_ecoute();
-	configure_codeur();
-	configureADC(ADC1,TIM1);
-	MyTimer_IT_Conf(TIM2, sail_management, 2);
-	MyTimer_IT_Enable(TIM2);
-	Config_Usart(USART1);
-	
-	
-	//Plate settings
-	//7E = 126 99 = 153 B5 181 
-	set_orientation(1);
-	volatile int duty;
-	int range_from_zero;
-	volatile double ratio;
-	conf_pwm_in_rx_rcv();
-	//
-	
-	//Gir settings
-	//
-	
-	//Accel settings
-	//
-	
-	
-	//USART settings
-	 Config_Usart(USART1);
-	while(1){
-		//Rx and plate management
-		
-		duty = get_pwm_in_duty();
-		ratio = get_pwm_in_ratio();
-		range_from_zero = duty-153;
-		double abs_range = abs(range_from_zero)/27.5;
-		if(ratio == 0){
-			forward();
-		}
-		else if(range_from_zero>3){
-			turn(1,abs_range);
-		}
-		else if(range_from_zero<-3){
-			turn(0,abs_range);
-		}
-		else{
-			forward();
-		}
-	}
 	
 		
 }

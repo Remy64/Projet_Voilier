@@ -41,7 +41,7 @@ Chacun des fichiers sources composants contient une fonction permettant d'initia
 Le main se divise en deux tâches exécutées "en parallèle".
 
 * (_sail_management(void)_)
-Une tâche gérant les actions automatiques de navigation, indépendates du pilote "sail_management". On y capte la valeur d'accélération sur l'axe Y(et donc l'angle de roulis correspondant), l'angle du voilier au vent et le niveau de batterie. On gère ensuite l'éventuel relâchement de l'écoute nécessaire passé un angle de roulis critique, ou sa tension en fonctionde l'angle au vent. Un message d'alerte est envoyé via UART en cas de batterie faible.
+Une tâche gérant les actions automatiques de navigation, indépendates du pilote . On y capte la valeur d'accélération sur l'axe Y(et donc l'angle de roulis correspondant), l'angle du voilier au vent et le niveau de batterie. On gère ensuite l'éventuel relâchement de l'écoute nécessaire passé un angle de roulis critique, ou sa tension en fonctionde l'angle au vent. Un message d'alerte est envoyé via UART en cas de batterie faible.
 
 * (_while(true)_)
 Dans une boucle infinie, on gère la réception des instructions de la télécommande, et on fait pivoter le plateau en conséquence. 

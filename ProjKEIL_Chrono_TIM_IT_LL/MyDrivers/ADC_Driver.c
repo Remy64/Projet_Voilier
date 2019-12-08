@@ -6,17 +6,15 @@ static int Y = 0;
 static int batteryLevel = 0;
 static int currentChannel = 1;
 
-int * getXref(void){
-	return &X;
-}
-int * getYRef(void){
-	return &Y;
-}
+//Once started, the ADC continously switch between three channels at each interruption to update the X,Y and Battery fields
 
+//Update function, called by an interruption
 void startConversion(void) {
+	//ADDON bit has to be set twice to start conversion
 	LL_ADC_Enable(ADC);
 	LL_ADC_Enable(ADC);
 	
+	//X aquisition disabled
 	/*if(currentChannel == 0) {
 		LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_10);*/
 	if(currentChannel == 1) {
@@ -39,7 +37,7 @@ void startConversion(void) {
 	currentChannel++;
 	currentChannel%=3;
 	currentChannel++;
-	
+	//End conversion by resetting the ADDON bit
 	LL_ADC_Disable(ADC);
 }
 
@@ -90,14 +88,9 @@ void configureADC(ADC_TypeDef * ADCx, TIM_TypeDef * Timer) {
 	LL_ADC_REG_Init(ADC, &myInitStructure);
 	
 	//TIMER
-	//enable clock
-	//MyTimer_Conf(Timer, 999, 719);
+	//Enable clock
 	MyTimer_IT_Conf(Timer, startConversion, 1);
 	MyTimer_IT_Enable(Timer);
-	
-	//réglage de la période d'échantillonage des deux voies utilisées
-	//LL_ADC_SetChannelSamplingTime(ADCx, LL_ADC_CHANNEL_0, LL_ADC_SAMPLINGTIME_1CYCLE_5);
-	//LL_ADC_SetChannelSamplingTime(ADC, LL_ADC_CHANNEL_1, LL_ADC_SAMPLINGTIME_1CYCLE_5);
 }
 
 void startADC(void) {

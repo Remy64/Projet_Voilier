@@ -85,24 +85,6 @@ void transmitAlert(USART_TypeDef * Usart) {
 
 	while(!LL_USART_IsActiveFlag_TXE(Usart));
 	LL_USART_TransmitData8(Usart,'W');
-		/*
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,' ');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'b');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'a');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'t');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'t');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'e');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'r');
-	while(!LL_USART_IsActiveFlag_TXE(Usart));
-	LL_USART_TransmitData8(Usart,'y');
-	*/
 	
 }
 
@@ -209,7 +191,7 @@ void set_rtc(void) {//TODO
 
 }
 
-int getDateTime(void) {
+int getDateTime(void) {//TODO
 	
 	volatile int date ;
 	// 0x00HHMMSS in bcd format

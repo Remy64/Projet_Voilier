@@ -1,7 +1,7 @@
 #include "Plate.h"
 const double GLOBAL_VOLTAGE = 12.0;
 PWM_TypeDef pwm_plate;
-PWM_TypeDef pwm_orientation;//We initially thought the orientation also had to be controlled via a PWM signal.
+PWM_TypeDef pwm_orientation;//We initially thought the orientation also had to be controlled via a PWM signal...
 void conf_pwm_plate(void){//Timer 2;Port A1;Channel 2;50Hz
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;
 	LL_GPIO_SetPinMode(GPIOA,LL_GPIO_PIN_1,LL_GPIO_MODE_ALTERNATE);

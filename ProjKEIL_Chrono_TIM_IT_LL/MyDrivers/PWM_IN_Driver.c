@@ -1,5 +1,4 @@
 #include "PWM_IN_Driver.h"
-#include "stm32f1xx_ll_bus.h"
 PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer){
 	PWM_IN_TypeDef pwm;
 	pwm.timer = timer;
@@ -41,9 +40,9 @@ PWM_IN_TypeDef conf_pwm_in(TIM_TypeDef * timer){
 	return pwm;
 }
 int get_period(PWM_IN_TypeDef * pwm){
-	return pwm ->timer ->CCR1; //WARNING, CONVERSION ? Absolute unit ? Relative to SystemClock ?
+	return pwm ->timer ->CCR1;
 }
 
 int get_duty_cycle(PWM_IN_TypeDef * pwm){
-	return pwm -> timer -> CCR2; //WARNING, CONVERSION? Duty cycle expressed in % or in time unit?
+	return pwm -> timer -> CCR2;
 }

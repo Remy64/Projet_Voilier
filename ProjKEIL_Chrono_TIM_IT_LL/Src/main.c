@@ -44,7 +44,7 @@ void  SystemClock_Config(void);
 int view;
 double g = 9.806;
 double cos_critical_roll_angle = 0.707;
-//A little bit of physics : 
+//Roll angle calculation : 
 // mx, my, beta  = accelX, accelY, rollAngleBeta
 //->mx + ->my = ->g
 //cos beta = my/g
@@ -52,24 +52,24 @@ double cos_critical_roll_angle = 0.707;
 //Critical angle (cf specs) : 45 degrees, cos 45 = cos pi/4 = sqrt(2)/2 ~= 0.707
 //Same on both side : cos(-x) = cos (x)
 void sail_management(){
-			//Sail management
+		//Sail management
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
 		double battery = BATTERY_LVL();
 		if((battery < 10)){
 			transmitAlert(USART1);
 		}
-		if(cos_rollAngleBeta < cos_critical_roll_angle){
-			set_angle_ecoute(0);//TODO
+		if(cos_rollAngleBeta < cos_critical_roll_angle){//See critical roll angle determination in the comments above
+			set_angle_ecoute(0);//Releases the sail in case of critical angle
 		}
 		else{
 			double angleAlpha = 180-mesurer_angle()*1.0;
 			double absAlpha = (angleAlpha<0)?-angleAlpha:angleAlpha;
 			if(absAlpha<=45){
-				set_angle_ecoute(180);//TODO
+				set_angle_ecoute(180);//Put maximum tension on the sail when the boat if facing the wind
 			}
 			else{
-				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));
+				set_angle_ecoute(2*(90-(absAlpha - 45)*(90.0/135.0)));//Linear relation in the interval 45;180
 				
 			}
 		}
@@ -119,11 +119,15 @@ int main(void)
 		
 		duty = get_pwm_in_duty();
 		ratio = get_pwm_in_ratio();
+		//Duty cycle framed into a 50-width interval equally spread around zero.
+		//Interval value choosen after exeprience, based on observed min_max value of the telecommand PWM.
 		range_from_zero = duty-153;
 		double abs_range = abs(range_from_zero)/27.5;
-		if(ratio == 0){
+		if(ratio == 0){//Happens if the telecommand is turned off
 			forward();
 		}
+		//Choose a direction based on the sign of the "transformed" duty cycle.
+		//An interval of -3;+3 is around 0 is treated as a neutral position.
 		else if(range_from_zero>3){
 			turn(1,abs_range);
 		}
@@ -134,6 +138,7 @@ int main(void)
 			forward();
 		}
 	}
+	//Unit tests. Uncomment each section individually to perform corresponding test. 
 	/*
 	//SECTION 1 : MANUAL TEST PWM DRIVER PORT A8 TIMER 1
 	RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;

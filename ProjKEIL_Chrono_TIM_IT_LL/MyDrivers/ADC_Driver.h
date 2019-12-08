@@ -12,10 +12,10 @@
 
 void configureADC(ADC_TypeDef * ADCx, TIM_TypeDef * Timer);
 void startADC(void);
-int getX(void);
-int getY(void);
-int getBatteryLevel(void);
 
-int * getXref(void);
-int * getYRef(void);
+//Warning:This function is disabled (returns 0). We didn't need the X value to compute the required angle.
+int getX(void);//Returns the raw value read in the register associated to [Port]
+
+int getY(void);//Returns the raw value read in the register associated to [Port]
+int getBatteryLevel(void);//Returns the raw value read in the register associated to [Port]
 #endif

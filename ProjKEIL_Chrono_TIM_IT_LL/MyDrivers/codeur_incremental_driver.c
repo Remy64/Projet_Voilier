@@ -33,5 +33,5 @@ void configure_codeur(void) {
 }
 
 int mesurer_angle(void) {
-	return LL_TIM_GetCounter(TIM3)/2 ;
+	return LL_TIM_GetCounter(TIM3)/2 ;//720 -> 360
 }

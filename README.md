@@ -6,7 +6,7 @@ Les fichiers sources sont divisés entre deux répertoires auxiliaires et le pro
 
 * Un répertoire "__MyDrivers__" contient l'implémentation de fonction bas-niveau générique pour la gestion du microcontrôleur, comme la gestion de PWM ou la récupératon d'une conversion par ADC.
 
-* Un répertoire "__Components__" contient des fonctions dédiées plus spéciciquement au voilier, s'appuyant sur les fonctions Drivers. Elles permettent par exemple de convertir les valeurs lues dans un registre sachant les caractéristiques du voilier.
+* Un répertoire "__Components__" contient des fonctions dédiées plus spécifiquement au voilier, s'appuyant sur les fonctions Drivers. Elles permettent par exemple de convertir les valeurs lues dans un registre sachant les caractéristiques du voilier.
 
 * Un fichier main s'appuyant sur les fonctions Components pour gérer en continue la navigation du voilier.
 

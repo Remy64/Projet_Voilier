@@ -52,12 +52,14 @@ double cos_critical_roll_angle = 0.707;
 //Critical angle (cf specs) : 45 degrees, cos 45 = cos pi/4 = sqrt(2)/2 ~= 0.707
 //Same on both side : cos(-x) = cos (x)
 void sail_management(){
+	char tbuf[64];
 		//Sail management
 		double accelY = get_accel_y();
 		double cos_rollAngleBeta = accelY/g;
 		double battery = BATTERY_LVL();
-		if((battery < 10)){
-			transmitAlert(USART1);
+		if((1 || battery < 100)){
+			snprintf( tbuf, sizeof(tbuf), "%g\n", battery );
+			transmitText(USART1, tbuf);
 		}
 		if(cos_rollAngleBeta < cos_critical_roll_angle){//See critical roll angle determination in the comments above
 			set_angle_ecoute(0);//Releases the sail in case of critical angle

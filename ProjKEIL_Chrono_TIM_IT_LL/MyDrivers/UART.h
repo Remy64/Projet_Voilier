@@ -14,6 +14,7 @@
 void Config_Usart(USART_TypeDef *Usart);//Prepare the UART for transmission
 
 void transmitAlert(USART_TypeDef * Usart);//Send a LOW message via UART
+void transmitText(USART_TypeDef * Usart, const char * txt);
 
 void set_rtc(void);//TODO configure I2C/RTC communication
 

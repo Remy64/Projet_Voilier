@@ -73,7 +73,14 @@ void Config_Usart(USART_TypeDef * Usart){
 
 }
 
-
+void transmitText(USART_TypeDef * Usart, const char * txt) {
+char c;
+while (( c = *(txt++) ) != 0 )
+{
+while(!LL_USART_IsActiveFlag_TXE(Usart)) {}
+	LL_USART_TransmitData8(Usart,c);
+}
+}
 
 void transmitAlert(USART_TypeDef * Usart) {
 	
